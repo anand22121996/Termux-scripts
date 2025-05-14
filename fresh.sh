@@ -30,18 +30,6 @@ rm -rf ~/nerdfonts
 # ---- Install Dev Tools ----
 pkg install -y mariadb openjdk-21 maven nodejs-lts
 
-# ---- Configure MariaDB Client Auth (no duplication) ----
-MYCNF="$PREFIX/etc/my.cnf"
-mkdir -p "$(dirname "$MYCNF")"
-if ! grep -qFs "[client]" "$MYCNF"; then
-  cat >> "$MYCNF" <<EOF
-[client]
-user=root
-password=root
-EOF
-  chmod 600 "$MYCNF"
-fi
-
 # ---- Start MariaDB ----
 echo "Starting MariaDB..."
 mariadbd-safe &
@@ -64,6 +52,18 @@ GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
 
 FLUSH PRIVILEGES;
 EOF
+
+# ---- Configure MariaDB Client Auth (no duplication) ----
+MYCNF="$PREFIX/etc/my.cnf"
+mkdir -p "$(dirname "$MYCNF")"
+if ! grep -qFs "[client]" "$MYCNF"; then
+  cat >> "$MYCNF" <<EOF
+[client]
+user=root
+password=root
+EOF
+  chmod 600 "$MYCNF"
+fi
 
 echo "✅ MariaDB setup complete."
 echo "✅ Termux fresh setup finished."
