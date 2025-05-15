@@ -1,0 +1,27 @@
+# Ignore object files, binaries, and temp files
+*.o
+*.out
+*.class
+*.log
+*.tmp
+*.swp
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Shell history files (if accidentally copied)
+.bash_history
+.zsh_history
+
+# Backup files
+*~
+*.bak
+*.old
+
+# Node-style package-lock or Python files (if any)
+package-lock.json
+__pycache__/
+
+# VS Code settings (optional, see below)
+.vscode
